@@ -343,13 +343,16 @@ Resources:
   CrawlerETLParquetTmpData:
     Type: AWS::Glue::Crawler
     Properties:
-      Name: smart-hub-etl-tmp-output-parquet
+      Name: smart-hub-etl-output-parquet
       Role: !GetAtt "CrawlerRole.Arn"
       Targets:
+        S3Targets:
+          - Path: !Join ["", ["s3://", !Ref "DataBucket", "/etl_output_parquet"]]
+      DatabaseName: !Ref GlueDatabase
         CatalogTargets:
           - DatabaseName: !Ref GlueDatabase
             Tables:
-              - !Ref ETLParquetTmpDataTable
+              - etl_output_parquet
       SchemaChangePolicy:
         UpdateBehavior: "UPDATE_IN_DATABASE"
         DeleteBehavior: "LOG"
