@@ -362,8 +362,8 @@ Resources:
     Type: AWS::Glue::Crawler
     Properties:
      Name: smart-hub-etl-output-parquet
-      Role: !GetAtt "CrawlerRole.Arn"
-      Targets:
+     Role: !GetAtt "CrawlerRole.Arn"
+     Targets:
       CatalogTargets:
           - DatabaseName: !Ref GlueDatabase
             Tables:
